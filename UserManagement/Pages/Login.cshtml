@@ -1,0 +1,34 @@
+﻿@page
+@model UserManagement.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="row">
+    @ViewData["login"]
+
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Credentials.Username" class="control-label"></label>
+                <input asp-for="Credentials.Username" class="form-control" />
+                <span asp-validation-for="Credentials.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credentials.Password" class="control-label"></label>
+                <input asp-for="Credentials.Password" class="form-control" />
+                <span asp-validation-for="Credentials.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="row"><a href="/Register">Create an Account</a></div>
+        <div class="row"><a href="/Register">Forgot Username</a></div>
+        <div class="row"><a href="/Register">Forgot Password</a></div>
+
+    </div>
+</div>
