@@ -25,7 +25,7 @@ namespace UserManagement.Models
                     , prf: KeyDerivationPrf.HMACSHA1
                     , iterationCount: iterations
                     , numBytesRequested: bytes
-                )).Replace("/","-").Replace("\\","-").Replace(" ","_")
+                )).Replace("/","-").Replace("\\","-").Replace(" ","_").Replace("+","-").Replace("*", "-")
             );
         }
     }

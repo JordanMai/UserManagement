@@ -87,7 +87,7 @@ namespace UserManagement.Pages.Service
                     await _context.ServiceToken.AddAsync(newToken);
                     await _context.SaveChangesAsync();
                     
-                    Models.ServiceToken token = _context.ServiceToken.Where(t => t.UserID == id && t.Action == "password").FirstOrDefault();
+                    Models.ServiceToken token = _context.ServiceToken.Where(t => t.UserID == id && t.Action == "password" && t.Resolved == false).FirstOrDefault();
 
                     // TODO: replace with email
                     //return RedirectToPage("./ResetPassword/" + token.URL);
