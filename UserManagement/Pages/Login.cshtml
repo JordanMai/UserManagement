@@ -5,9 +5,27 @@
 }
 
 
-<div class="row">
-    @ViewData["login"]
+@{
+    if (ViewData.ContainsKey("warn"))
+    {
+        var W = "null";
 
+        if (ViewData["warn"] != null)
+        {
+            W = ViewData["warn"].ToString();
+        }
+
+        <div class="row">
+            <div class="text-danger">
+                <text>
+                    Error: @W
+                </text>
+            </div>
+        </div>
+    }
+}
+
+<div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,8 +45,8 @@
         </form>
 
         <div class="row"><a href="/Register">Create an Account</a></div>
-        <div class="row"><a href="/Register">Forgot Username</a></div>
-        <div class="row"><a href="/Register">Forgot Password</a></div>
+        <div class="row"><a href="/Service/Username">Forgot Username</a></div>
+        <div class="row"><a href="/Service/Password">Forgot Password</a></div>
 
     </div>
 </div>

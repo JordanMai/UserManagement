@@ -69,6 +69,9 @@ namespace UserManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Creation")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("Expiration")
                         .HasColumnType("datetime2");
 
@@ -118,6 +121,11 @@ namespace UserManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(16)")
+                        .HasMaxLength(16);
 
                     b.HasKey("UserID");
 

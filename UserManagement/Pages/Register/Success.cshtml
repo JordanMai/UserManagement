@@ -1,0 +1,18 @@
+﻿@page
+@model UserManagement.Pages.Register.SuccessModel
+@{
+    ViewData["Title"] = "Registration Successful";
+
+    if (ViewData.ContainsKey("token"))
+    {
+        <div class="row">
+            Please head to <a href="../Activate/@(((Models.ServiceToken)ViewData["token"]).URL)">&nbsp;this page&nbsp;</a> to activate your account. Our email system is under maintenance. <br/>
+        </div>
+    }
+    else
+    {
+        <div class="text-danger">
+            There was an error retrieving your token.
+        </div>
+    }
+}

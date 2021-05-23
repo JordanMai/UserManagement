@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserManagement.Models
 {
+    [Serializable]
     public class User
     {
         [Key]
@@ -28,7 +29,7 @@ namespace UserManagement.Models
 
         [StringLength(16)]
         [Required]
-        public string Username;
+        public string Username { get; set; }
 
         [StringLength(255)]
         [Required]

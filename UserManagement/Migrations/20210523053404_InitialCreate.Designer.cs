@@ -10,7 +10,7 @@ using UserManagement.Data;
 namespace UserManagement.Migrations
 {
     [DbContext(typeof(UserManagementContext))]
-    [Migration("20210514091737_InitialCreate")]
+    [Migration("20210523053404_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,9 @@ namespace UserManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Creation")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("Expiration")
                         .HasColumnType("datetime2");
 
@@ -120,6 +123,11 @@ namespace UserManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(16)")
+                        .HasMaxLength(16);
 
                     b.HasKey("UserID");
 

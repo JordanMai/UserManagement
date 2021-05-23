@@ -44,6 +44,7 @@ namespace UserManagement.Migrations
                     URL = table.Column<string>(nullable: false),
                     UserID = table.Column<int>(nullable: false),
                     Action = table.Column<string>(nullable: false),
+                    Creation = table.Column<DateTime>(nullable: false),
                     Expiration = table.Column<DateTime>(nullable: false),
                     Resolved = table.Column<bool>(nullable: false)
                 },
@@ -61,6 +62,7 @@ namespace UserManagement.Migrations
                     FirstName = table.Column<string>(maxLength: 20, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(maxLength: 255, nullable: false),
+                    Username = table.Column<string>(maxLength: 16, nullable: false),
                     Password = table.Column<string>(maxLength: 255, nullable: false),
                     Salt = table.Column<string>(maxLength: 255, nullable: false)
                 },

@@ -1,0 +1,16 @@
+﻿@page
+@model UserManagement.Pages.UserSystem.IndexModel
+@{
+    ViewData["Title"] = "You're In.";
+    Models.User U = (Models.User)ViewData["login_user"];
+}
+
+<div class="text-center">
+    <h1 class="display-5">
+        Welcome, @U.FirstName @U.LastName
+    </h1>
+
+    <a href="/Logout">Log Out</a>
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

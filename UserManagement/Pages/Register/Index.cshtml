@@ -6,6 +6,78 @@
 
 <div class="text-center">
     <h1 class="display-5">Create an Account</h1>
+</div>
 
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    if (ViewData.ContainsKey("warn"))
+    {
+        var W = "null";
+
+        if (ViewData["warn"] != null)
+        {
+            W = ViewData["warn"].ToString();
+        }
+
+        <div class="row">
+            <div class="text-danger">
+                <text>
+                    Error: @W
+                </text>
+            </div>
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Credentials.FirstName" class="control-label"></label>
+                <input asp-for="Credentials.FirstName" class="form-control" />
+                <span asp-validation-for="Credentials.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credentials.LastName" class="control-label"></label>
+                <input asp-for="Credentials.LastName" class="form-control" />
+                <span asp-validation-for="Credentials.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Credentials.Email" class="control-label"></label>
+                <input asp-for="Credentials.Email" class="form-control" />
+                <span asp-validation-for="Credentials.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Credentials.Username" class="control-label"></label>
+                <input asp-for="Credentials.Username" class="form-control" />
+                <span asp-validation-for="Credentials.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credentials.Password" class="control-label"></label>
+                <input asp-for="Credentials.Password" class="form-control" />
+                <span asp-validation-for="Credentials.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Credentials.SecurityQuestions[0].Question" class="control-label"></label>
+                <select id="q2" asp-for="Credentials.SecurityQuestions[0].Question" asp-items="Model.QuestionList">
+                    <option value="">Please select a question.</option>
+                </select>
+                <span asp-validation-for="Credentials.SecurityQuestions[0].Question" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credentials.SecurityAnswers[0].Answer" class="control-label"></label>
+                <input asp-for="Credentials.SecurityAnswers[0].Answer" class="form-control" />
+                <span asp-validation-for="Credentials.SecurityAnswers[0].Answer" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Sign Up" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
 </div>

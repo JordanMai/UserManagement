@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using UserManagement.Data;
 using UserManagement.Models;
 
 namespace UserManagement.Pages
@@ -21,28 +19,53 @@ namespace UserManagement.Pages
             _context = context;
         }
 
-        public IActionResult OnGet()
+        [BindProperty]
+        public Models.Login Credentials {get; set;}
+
+
+
+        public async Task<IActionResult> OnGetAsync()
         {
+            if (HttpContext.Session.TryGetValue("login_user", out _))
+            {
+                return RedirectToPage("./UserSystem/Index");
+            }
+
             return Page();
         }
 
-        [BindProperty]
-        public Models.Login Credentials {get; set;}
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                ViewData.Remove("login");
+                ViewData["warn"] = "Incomplete login info.";
                 return Page();
             }
 
-            ViewData["login"] = ("Username: " + Credentials.Username + "\nPassword: " + Credentials.Password + "\nValid:" + await Credentials.TryLogin(_context));
+            // store successful login
+            User success = await Credentials.TryLogin(_context);
 
-            return Page();
+            // try again if failed
+            if (success == null)
+            {
+                ViewData["warn"] = "Invalid login info.";
+                return Page();
+            }
 
-            //return RedirectToPage("./Index");
+            // check if account is activated
+            if (_context.ServiceToken.Any(t => t.UserID == success.UserID && t.Action == "activate" && t.Resolved == false))
+            {
+                ViewData["warn"] = "Account is not activated.";
+                return Page();
+            }
+
+            // store login user in session
+            HttpContext.Session.Set("login_user", UMSerializer.SerializeUser(success));
+
+            return RedirectToPage("./UserSystem/Index");
         }
+
 
         /*public async Task OnGetAsync()
         {

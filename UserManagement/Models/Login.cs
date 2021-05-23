@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,14 +9,16 @@ namespace UserManagement.Models
 {
     public class Login
     {
+        [Required]
         public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
 
-        public async Task<int> TryLogin(UserManagement.Data.UserManagementContext _context)
+        public async Task<User> TryLogin(UserManagement.Data.UserManagementContext _context)
         {
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
-                return -1;
+                return null;
             }
 
             // set up LINQ for search
@@ -27,11 +30,11 @@ namespace UserManagement.Models
             ).ToList();
             if (!User.Any())
             {
-                return 1;
+                return null;
             }
             if(User.Count > 1)
             {
-                return 3;
+                return null;
             }
 
             var Account = User.Single();
@@ -41,14 +44,12 @@ namespace UserManagement.Models
             // check if password matches
             if(Account.Password == tryPass)
             {
-                return 0;
+                return Account;
             }
             else
             {
-                return 2;
+                return null;
             }
-
-            //return -2;
         }
     }
 }

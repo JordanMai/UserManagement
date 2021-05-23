@@ -1,0 +1,42 @@
+﻿@page "{AccessURL?}"
+@model UserManagement.Pages.ActivateModel
+@{
+    ViewData["Title"] = "Activate Account";
+
+    if (ViewData.ContainsKey("message"))
+    {
+        <div>
+            @ViewData["message"]
+        </div>
+    }
+    else if (ViewData.ContainsKey("warn"))
+    {
+        <div class="text-danger">
+            @ViewData["warn"]
+        </div>
+    }
+    else if (ViewData.ContainsKey("username"))
+    {
+        <div class="row">
+            <p>
+                By clicking this button, you will activte the account @(ViewData["Username"]). Do not click it unless this is your account.
+            </p>
+        </div>
+        <div class="row">
+            <form method="post">
+                <!--<div class="form-group">
+                    <label asp-for="TokenID" class="control-label"></label>
+                    <input asp-for="TokenID" class="form-control" disabled/>
+                </div>-->
+
+                <div class="form-group">
+                    <input type="submit" value="Activate Account" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    }
+
+}
+
+
+

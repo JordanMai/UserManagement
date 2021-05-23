@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserManagement.Models
 {
+    [Serializable]
     public class ServiceToken
     {
         [Key]
@@ -18,6 +19,10 @@ namespace UserManagement.Models
 
         [Required]
         public string Action { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Required]
+        public DateTime Creation { get; set; }
 
         [DataType(DataType.DateTime)]
         [Required]

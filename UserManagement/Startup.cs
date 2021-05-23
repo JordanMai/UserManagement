@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UserManagement
 {
@@ -29,6 +30,19 @@ namespace UserManagement
 
             services.AddDbContext<UserManagementContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("UserManagementContext")));
+
+
+            // https://www.learnrazorpages.com/razor-pages/session-state
+            // should allow session data
+            services.AddSession(
+                options =>
+                {
+                    options.IdleTimeout = TimeSpan.FromMinutes(30);
+                }
+                );
+            services.AddMemoryCache();
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +61,17 @@ namespace UserManagement
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+
+            app.UseSession();
+            /*app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });*/
+
+
 
             app.UseRouting();
 

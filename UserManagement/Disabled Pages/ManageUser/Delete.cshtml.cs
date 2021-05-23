@@ -49,6 +49,15 @@ namespace UserManagement.Pages.ManageUser
 
             if (User != null)
             {
+                foreach (var a in _context.SecurityAnswer)
+                {
+                    _context.SecurityAnswer.Remove(a);
+                }
+                foreach (var t in _context.ServiceToken)
+                {
+                    _context.ServiceToken.Remove(t);
+                }
+
                 _context.User.Remove(User);
                 await _context.SaveChangesAsync();
             }
