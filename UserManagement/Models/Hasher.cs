@@ -18,14 +18,14 @@ namespace UserManagement.Models
 
         public string HashPassword(string password, string salt, int iterations, int bytes)
         {
-            return Convert.ToBase64String(
+            return (Convert.ToBase64String(
                 KeyDerivation.Pbkdf2(
                     password: password
                     , salt: Convert.FromBase64String(salt)
                     , prf: KeyDerivationPrf.HMACSHA1
                     , iterationCount: iterations
                     , numBytesRequested: bytes
-                )
+                )).Replace("/","-").Replace("\\","-").Replace(" ","_")
             );
         }
     }
